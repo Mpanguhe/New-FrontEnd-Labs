@@ -22,142 +22,110 @@
 // Read the comments and add your code where it is specified for each question.
 /* ----------------------------------------------------- */
 
-/*------------------------ Debugging Examples ------------------------*/
-console.log(`-------------------------- 
-Question 1: Debugging!`)
-
-/** Instruction: This lab is focused on two goals: 
- *               1) Increasing competence on reading and debugging errors in the console/browser
- *                  and debugging pre-written code
- *               2) Creating tests in mocha/chai for each question
- * 
- *  
- * Note:         Debugging is the art of tackling a specific problem from every angle.
- *               
- *               Think about the expected result, and consider the possible issues;
- *               Generally:    Is my code connected correctly? Is there a typo? 
- *                             Am I using this correctly? 
- *                             What kind of data type (string/array/object etc) am I working with?
- *               
- *               Specifically: My data type is a string.. am I able to use .map() on a string?                             
- *                             
- * 
- *               Question everything. console.log() everything.
- *               Dev tools and google are your friend :)
- * 
- * Step 1: Uncomment out the code below the question including the last console.log(). 
- *         Run your code and find the error.
- * Step 2: After you've fixed the error for that question, create a test in tests.js using mocha/chai
- * 
- * 
- * DO NOT REMOVE THE LAST CONSOLE.LOG() IT IS FOR CHECKING YOUR WORK
- * The titles are a hint at the expected answer, not a solution. Read the error in your browser.
- * You are given an example problem and test.
- *
-/*--------------------------------------------------------------------*/
-console.log('Example Question: Add two numbers')
-/* -- STEP 1: DEBUG CODE --*/
-
-// BROKEN CODE EXAMPLE:
-// function addTwoNumbers (num1,num2) {
-//    num1+num2
-// }
-
-// console.log(addTwoNumbers(2,3)) // ERROR IN CONSOLE: undefined
-// AFTER DEBUGGING:
-function addTwoNumbers(num1, num2) {
-  return `num1 + num2 is: ${num1 + num2}`
+class Card {
+  constructor(suit, rank) {
+    this.suit = suit;
+    this.rank = rank;
+  }
 }
 
-console.log(addTwoNumbers(2, 3)) // logs 5
-/* -- STEP 2: CREATE A TEST IN tests.js -- */
-/*--------------------------------------------------------------------*/
-console.log(`1a: Sorted array of numbers:`)
+class Deck {
+  constructor() {
+    this.cards = [];
+    const suits = ['hearts', 'diamonds', 'clubs', 'spades'];
+    const ranks = ['ace', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'jack', 'queen', 'king'];
+    for (let suit of suits) {
+      for (let rank of ranks) {
+        this.cards.push(new Card(suit, rank));
+      }
+    }
+    this.shuffle();
+  }
+  
+  shuffle() {
+    for (let i = this.cards.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [this.cards[i], this.cards[j]] = [this.cards[j], this.cards[i]];
+    }
+  }
+  
+  deal() {
+    return this.cards.pop();
+  }
+}
 
-// const arrayOfNumbers = [1, 5, 3, 2, 4]
-// arrayOfNumbers = arrayOfNumbers.sort((a, b) => a - b)
+class Player {
+  constructor(name) {
+    this.name = name;
+    this.points = 0;
+  }
+  
+  playCard() {
+    return this.hand.pop();
+  }
+  
+  addPoints(points) {
+    this.points += points;
+  }
+  
+  setHand(hand) {
+    this.hand = hand;
+  }
+}
 
-// console.log(arrayOfNumbers)
-/*----------------------------------------------------*/
-console.log(`1b: Manage my wallet `)
+class War {
+  constructor(player1Name, player2Name) {
+    this.deck = new Deck();
+    this.player1 = new Player(player1Name);
+    this.player2 = new Player(player2Name);
+    this.dealCards();
+  }
+  
+  dealCards() {
+    const hand1 = [];
+    const hand2 = [];
+    for (let i = 0; i < 26; i++) {
+      hand1.push(this.deck.deal());
+      hand2.push(this.deck.deal());
+    }
+    this.player1.setHand(hand1);
+    this.player2.setHand(hand2);
+  }
+  
+  playRound() {
+    const card1 = this.player1.playCard();
+    const card2 = this.player2.playCard();
+    if (this.getCardValue(card1) > this.getCardValue(card2)) {
+      this.player1.addPoints(1);
+    } else if (this.getCardValue(card1) < this.getCardValue(card2)) {
+      this.player2.addPoints(1);
+    }
+  }
+  
+  getCardValue(card) {
+    const values = {'ace': 14, 'king': 13, 'queen': 12, 'jack': 11};
+    return values[card.rank] || parseInt(card.rank);
+  }
+  
+  playGame() {
+    for (let i = 0; i < 26; i++) {
+      this.playRound();
+    }
+    this.displayResult();
+  }
+  
+  displayResult() {
+    console.log(`${this.player1.name} got ${this.player1.points} points.`);
+    console.log(`${this.player2.name} got ${this.player2.points} points.`);
+    if (this.player1.points > this.player2.points) {
+      console.log(`${this.player1.name} wins!`);
+    } else if (this.player1.points < this.player2.points) {
+      console.log(`${this.player2.name} wins!`);
+    } else {
+      console.log(`It is a tie!`);
+    }
+  }
+}
 
-// class Wallet {
-//   constructor(startingMoney) {
-//     this.money = startingMoney
-//   }
-
-//   addMoney(amount) {
-//     money += amount
-//   }
-
-//   removeMoney(amount) {
-//     money -= amount
-//   }
-// }
-
-// const myWallet = new Wallet(100)
-// myWallet.removeMoney(14.99)
-// myWallet.addMoney(3)
-
-// console.log(myWallet.money)
-/*----------------------------------------------------*/
-console.log(`1c: Day of the Week`)
-//In some cases, there's no error, but you're not getting your expected result back.
-//Reminder: Switch statements are a 'cleaner' version of if/else
-
-// const dayOfTheWeek = (num) => {
-//   switch (num) {
-//     case 1:
-//       'Monday'
-//     case 2:
-//       'Tuesday'
-//     case 3:
-//       'Wednesday'
-//     case 4:
-//       'Thursday'
-//     case 5:
-//       'Friday'
-//     case 6:
-//       'Saturday'
-//     case 7:
-//       'Sunday'
-//     default:
-//       console.log('Err. Something went wrong.')
-//   }
-// }
-
-// console.log(dayOfTheWeek(5)) // should log Friday
-/*----------------------------------------------------*/
-console.log(`1d: Only wizards shall pass!`)
-
-// const movieCharacters = [
-//   {
-//     name: 'Howl',
-//     isAWizard: true,
-//     quote: `You're wearing that hat? After all the magic I used to make your dress pretty?`,
-//   },
-//   {
-//     name: 'Kalcifer',
-//     isAWizard: false,
-//     quote: `I don't cook! I'm a scary and powerful fire demon!`,
-//   },
-//   {
-//     name: 'Gandalf',
-//     isAWizard: true,
-//     quote: `You shall not pass!`,
-//   },
-//   {
-//     name: 'Luke Skywalker',
-//     isAWizard: false,
-//     quote: `May the Force be with you.`,
-//   },
-// ]
-
-// function onlyWizards(arrayOfCharacters) {
-//   return arrayOfCharacters.filter((character) => character == true)
-// }
-
-// //check out the console.table() method you can use on objects!
-// console.table(onlyWizards(movieCharacters)) //expecting an array of characters whose key/value pair is = isAWizard: true
-/*----------------------------------------------------*/
-console.log(`-----------Finished------------`)
+const game = new War('Player 1', 'Player 2');
+game.playGame();

@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "chai": "^4.3.7",
+    "moca": "^0.4.3",
     "mocha": "^10.2.0"
   }
 }
