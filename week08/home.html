@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Ekai</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      display: inline-block;
+      margin-right: 10px;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    .header {
+      text-align: center;
+    }
+
+    .department {
+      font-weight: bold;
+    }
+
+    .image-container {
+      text-align: center;
+    }
+
+    .image-container img {
+      margin-bottom: 10px;
+    }
+
+    .table-container {
+      margin-top: 20px;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th, td {
+      border: 1px solid black;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      font-weight: bold;
+    }
+
+    .form-container {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    form {
+      display: inline-block;
+      text-align: left;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    input[type="email"] {
+      width: 200px;
+      padding: 5px;
+      margin-bottom: 10px;
+    }
+
+    input[type="submit"] {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    
+    /* Increase icon size */
+    .icon-link {
+      font-size: 30px;
+    }
+    
+    /* Hover effect */
+    .icon-link:hover::before {
+      content: attr(data-name);
+      position: absolute;
+      top: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #000;
+      color: #fff;
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 14px;
+      opacity: 0;
+      transition: opacity 0.2s ease-in-out;
+    }
+    
+    .icon-link:hover::before {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <ul>
+    <li><a href="Home.html" class="icon-link" data-name="Home"><i class="fas fa-home"></i></a></li>
+    <li><a href="activities.html" class="icon-link" data-name="Activities"><i class="fas fa-hiking"></i></a></li>
+    <li><a href="restaurants.html" class="icon-link" data-name="Restaurants"><i class="fas fa-utensils"></i></a></li>
+  </ul>
+  
+  <div class="header">
+    <h1>Welcome to My Ekai</h1>
+    <h2>Faces of the organization</h2>
+  </div>
+  
+  <div class="image-container">
+    <img src="/Users/mmpanguhe2/Downloads/IMG_6672.JPG" alt="Thierry Logo">
+    <p class="department">Head of department</p>
+    <img src="/Users/mmpanguhe2/Downloads/IMG_6673.JPG" alt="Kid">
+    <p class="department">Future President of the organization</p>
+    <img src="/Users/mmpanguhe2/Downloads/IMG_6671.JPG" alt="Image 3">
+    <p class="department">Head of Research and Development</p>
+  </div>
+  
+  <div class="table-container">
+    <h2>Table</h2>
+    <table>
+      <tr>
+        <th>Restaurants</th>
+        <th>Activities</th>
+        <th>Schools</th>
+      </tr>
+      <tr>
+        <td>Meze fresh, Kigali</td>
+        <td>Bowling, Kigali</td>
+        <td>ALU, Kigali</td>
+      </tr>
+      <tr>
+        <td>Nyurah, Kigali</td>
+        <td>Camp Kigali, Kigali</td>
+        <td>St Joseph, Kabgayi</td>
+      </tr>
+    </table>
+  </div>
+  
+  <div class="form-container">
+    <h2>Registration</h2>
+    <form>
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" placeholder="Enter your name"><br><br>
+    
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" placeholder="Enter your email"><br><br>
+    
+      <input type="submit" value="Submit">
+    </form>
+  </div>
+</body>
+</html>
