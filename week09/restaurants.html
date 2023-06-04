@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Restaurant</title>
+  <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+</head>
+<body>
+ 
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      display: inline-block;
+      margin-right: 10px;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    .header {
+      text-align: center;
+    }
+
+    .department {
+      font-weight: bold;
+    }
+
+    .image-container {
+      text-align: center;
+    }
+
+    .image-container img {
+      margin-bottom: 10px;
+    }
+
+    .table-container {
+      margin-top: 20px;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th, td {
+      border: 1px solid black;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      font-weight: bold;
+    }
+
+    .form-container {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    form {
+      display: inline-block;
+      text-align: left;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    input[type="email"] {
+      width: 200px;
+      padding: 5px;
+      margin-bottom: 10px;
+    }
+
+    input[type="submit"] {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    
+    /* Increase icon size */
+    .icon-link {
+      font-size: 30px;
+    }
+    
+    /* Hover effect */
+    .icon-link:hover::before {
+      content: attr(data-name);
+      position: absolute;
+      top: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #000;
+      color: #fff;
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 14px;
+      opacity: 0;
+      transition: opacity 0.2s ease-in-out;
+    }
+    
+    .icon-link:hover::before {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body class="container">
+  <nav class="navbar navbar-light bg-light justify-content-between">
+   
+    <ul>
+      <li><a href="Home.html" class="icon-link navbar-brand" data-name="Home"><i class="fas fa-home"></i></a></li>
+      <li><a href="activities.html" class="icon-link navbar-brand" data-name="Activities"><i class="fas fa-hiking"></i></a></li>
+      <li><a href="restaurants.html" class="icon-link navbar-brand" data-name="Restaurants"><i class="fas fa-utensils"></i></a></li>
+    </ul>
+    <form class="form-inline">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </nav>
+  
+      <button class="btn btn-info ">Notifications <span class="badge badge-secondary">2</span></button>
+      <h1>Restaurants to visit in Kigali</h1>
+
+     
+
+      
+      
+  <script src="https://kit.fontawesome.com/your-font-awesome-kit.js" crossorigin="anonymous"></script>
+  <div class="form-container">
+    <h2>Review</h2>
+    <form>
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" placeholder="Enter your name"><br><br>
+    
+      <label for="email">feedback</label>
+      <input type="email" id="email" name="email" placeholder="how do you feel about the services from Restaurant"><br><br>
+    
+      <button class="btn btn-dark"> Submit</button>
+    </form>
+  </div>
+  <script src="node_modules/jquery/dist/jquery.js"></script>
+  <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+</body>
+</html>
