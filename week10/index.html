@@ -1,24 +1,66 @@
-<!-- 
-  Copyright (c) 2023 Promineo Tech
-  Author:  Promineo Tech Academic Team
-  Subject:  JavaScript and DOM Manipulation 
-  FE Lab Week 10
- -->
-
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Week 10 Lab</title>
-  </head>
-  <body>
-    <!-- Uncomment the button below during Part 3: -->
-    <!-- <button id="myButton">Pt 3: Change Background Color</button> -->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam submission</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+</head>
+<bod class="container">
+    <br>
+    <div class="card">
+        <div class="card-buddy">
+            <div class="mx-auto" style="width: 200px;">
+                Essay Submission
+              </div>
+           <br>
+        <div class="row">
+            <div class="col-sm">
+                <div class="form-group">
+                    <label for="New-start-date"> Open date</label>
+                    <input type="date" class="form-control" id="New-start-date">
+                </div>
+            </div>
 
-    <!-- Code reads top-down. Why would our script go on the bottom 
-         of our <body> element instead of inside the head? -->
-    <script src="./week10Lab.js"></script>
-  </body>
+            <div class="col-sm">
+                <div class="form-group">
+                    <label for="New-end-date"> Due date</label>
+                    <input type="date" class="form-control" id="New-end-date">
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-sm">
+                <div class="form-group">
+                    <label for="New-task"> Name of the Essay</label><br>
+                    <input type="text" class="form-control" id="New-task" placeholder="Type in the name of your essay">
+                </div>
+
+            </div>
+
+        </div>
+        <div>
+            <button id="add" class="btn btn-outline-secondary from-control">Submit</button>
+        </div>
+        </div>
+    </div>
+
+    <table id="list" class="table table-dark table-striped table-hover">
+        <tr>
+            <th>Essay Name</th>
+            <th>Date Created</th>
+            <th>Open Date</th>
+            <th>Due date</th>
+            <th>Actions</th>
+        </tr>
+
+
+    </table>
+
+<script src="todo.js"></script>
+  <script src="node_modules/jquery/dist/jquery.js"></script> 
+  <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script> 
+</body>
 </html>
