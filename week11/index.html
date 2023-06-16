@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tic-Tac-Toe</title>
+  <style>
+    table {
+      border-collapse: collapse;
+    }
+    table td {
+      width: 100px;
+      height: 100px;
+      text-align: center;
+      font-size: 36px;
+      border: 1px solid black;
+      cursor: pointer;
+    }
+    h1 {
+      text-align: center;
+    }
+    .alert {
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      margin-top: 20px;
+      padding: 10px;
+    }
+  </style>
+  
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+</head>
+<body class="container">
+  <h1 id="turn">It's X's turn</h1>
+  <table class="table " id="grid">
+    <tr>
+      <td onclick="makeMove(0, 0)"></td>
+      <td onclick="makeMove(0, 1)"></td>
+      <td onclick="makeMove(0, 2)"></td>
+    </tr>
+    <tr>
+      <td onclick="makeMove(1, 0)"></td>
+      <td onclick="makeMove(1, 1)"></td>
+      <td onclick="makeMove(1, 2)"></td>
+    </tr>
+    <tr>
+      <td onclick="makeMove(2, 0)"></td>
+      <td onclick="makeMove(2, 1)"></td>
+      <td onclick="makeMove(2, 2)"></td>
+    </tr>
+  </table>
+  <br>
+  <button class="btn btn-outline-secondary from-control" onclick="restartGame()">Restart Game</button>
+  
+  <div id="result" class="alert"></div>
+
+  <script src="index.js"></script>
+</body>
+</html>
