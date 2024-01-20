@@ -1,140 +1,148 @@
-/* 
-  Copyright (c) 2023 Promineo Tech
-  Author:  Promineo Tech Academic Team
-  Subject:  React Week 14 - Props, State, Events
-  FE Lab Week 14
-*/
+import React, { useState } from 'react';
+import './App.css';
 
-/* ----------------------------------------------------- */
-// Key Term List:
-// React
-// Node Packet Manager (NPM)
-// Webpack
-// Component
-// JSX
-// JSX Documentation: https://reactjs.org/docs/introducing-jsx.html
-// functional programming
-// class based programming
-// props (aka properties)
-// state
-// events
-// lifecycle methods
-// LM docs: https://reactjs.org/docs/react-component.html
+// Stars component for rating
+const Stars = ({ rating, onRate }) => {
+  const starIcons = Array.from({ length: 5 }, (_, index) => (
+    <span
+      key={index}
+      onClick={() => onRate(index + 1)}
+      style={{ cursor: 'pointer', color: index < rating ? 'gold' : 'gray' }}
+    >
+      ★
+    </span>
+  ));
 
-/* ----------------------------------------------------- */
-// Please do not alter the existing code unless instructed to do so.
-// Read the comments and add your code where it is specified for each question.
-/* ----------------------------------------------------- */
+  return <div>{starIcons}</div>;
+};
 
-// Feel free to copy/paste the instructions to different components for easier visibility.
+// Review component for displaying individual reviews
+const Review = ({ text }) => <p>{text}</p>;
 
-/**
- * !BEFORE YOU START!
- * This lab is a continuation of the Week 13 Lab.
- * It is not necessary to finish the Week 13 Lab to work on this one.
- *
- * You are welcome to use this project, or if you did complete the Week 13 lab,
- * just copy/paste the new directions from here into your project.
- */
+// ReviewForm component for submitting new reviews
+const ReviewForm = ({ onReviewSubmit }) => {
+  const [newReview, setNewReview] = useState('');
 
-/* ------------------ Part 1: State/Constructor/Props --------------------- */
-/**
- * REMINDER: Start your developer server by moving to your project in your terminal, then type 'npm start'
- *
- * Goal: Pass information using props from our App.js to a new component, Appointments.js.
- *
- * Step 1: Create a new component in your src folder called 'Appointments.js'
- *         Create the base format for a class based component in Appointments.js
- *
- * Step 2: Render your Appointments.js component in your App.js component.
- *
- * Step 3: Let's hold our information in our App.js, and pass that information
- *         as a prop to our <Appointments/> component.
- *
- *         Copy/paste the code below our imports in App.js:
- *                (If you hold the middle mouse button and drag,
- *                 it should highlight the text to copy/paste)
- *
- *                 let allCustomers = [
- *               {
- *                 firstName: 'Shawn',
- *                 lastName: 'Lennon',
- *                 appointmentTime: '1:00PM',
- *               },
- *               {
- *                 firstName: 'Jewel',
- *                 lastName: 'Ronnie',
- *                 appointmentTime: '2:00PM',
- *               },
- *               {
- *                 firstName: 'Martie',
- *                 lastName: 'Francis',
- *                 appointmentTime: '3:00PM',
- *               },
- *             ]
- *
- * Step 4: Create a property on the <Appointments/> component called 'customers',
- *         set it equal to our variable, allCustomers
- *
- *         Does this look familiar? <img src="someUrl.com"/> ... src is also a prop/property.
- *
- *         Hint: <Appointments customers={allCustomers} />
- *
- * Step 5: In class based components, we hold state inside of the constructor(){}.
- *         Because we want our Appointments.js to absorb information from App.js, we also need super()
- *         inside of the constructor.
- *         In Appointments.js, above your render(), create a constructor that will hold our state.
- *
- * Step 6: Pass the word: props  into your constructor argument, and your super argument.
- *         console.log(props) at the bottom of your constructor. What data type is it?
- *         It should be an object.
- *
- *         Inside the constructor in Appointments.js, set
- *         this.customersArray = props.customers
- *
- *         console.log(this.customersArray) inside the constructor.
- *         Now we can use this.customersArray in our Appointments.js!
- *
- * */
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (newReview.trim() !== '') {
+      onReviewSubmit(newReview);
+      setNewReview('');
+    }
+  };
 
-/* ------------------ Part 2: Creating our Table  --------------------- */
+  return (
+    <form onSubmit={handleSubmit}>
+      <textarea
+        rows="3"
+        placeholder="Leave a review..."
+        value={newReview}
+        onChange={(e) => setNewReview(e.target.value)}
+      />
+      <button type="submit">Submit Review</button>
+    </form>
+  );
+};
 
-/** Note: Feel free to copy/paste this into your Appointments.js for easier visibility.
- *
- * Goal: Create a table that renders allCustomers
- *
- * Step 1: Create a table with a thead/tbody. The thead should have a row with
- *         3 th elements: First Name, Last Name, and Appointment Time.
- * Step 2: Inside of your tbody, create a <tr> element that will .map()
- *         over this.customersArray and return
- *         3 <td> elements, one for firstName, lastName, and appointmentTime.
- *
- *         Check the README for a .map() hint.
- * Step 3: Style it with css using the App.css file!
- *
- */
+// Movie component that includes Stars, ReviewList, and ReviewForm
+const Movie = ({ movie, onRate, onReviewSubmit }) => {
+  return (
+    <div className="movie">
+      <h2>{movie.title}</h2>
+      <img src={movie.image} alt={movie.title} style={{width :'200px', height: '300px'}}/>
+      <p>{movie.synopsis}</p>
+      <Stars rating={movie.rating} onRate={(rating) => onRate(movie.id, rating)} />
+      <ReviewList reviews={movie.reviews} />
+      <ReviewForm onReviewSubmit={(text) => onReviewSubmit(movie.id, text)} />
+    </div>
+  );
+};
 
-/* -- ALL YOUR COMPONENT/STYLE IMPORTS HERE -- */
-import './App.css'
-import Nav from './Nav'
+// ReviewList component for displaying a list of reviews
+const ReviewList = ({ reviews }) => {
+  return (
+    <div className="review-list">
+      <h3>Reviews</h3>
+      {reviews.map((review, index) => (
+        <Review key={index} text={review} />
+      ))}
+    </div>
+  );
+};
 
-let date = new Date()
+// MovieList component as a container for Movie components
+const MovieList = ({ movies, onRate, onReviewSubmit }) => {
+  return (
+    <div className="movie-list">
+      {movies.map((movie) => (
+        <Movie key={movie.id} movie={movie} onRate={onRate} onReviewSubmit={onReviewSubmit} />
+      ))}
+    </div>
+  );
+};
 
-let singleUser = {
-  name: 'Jane Smith',
-  todaysDate: date.toDateString(),
-}
-
+// App component
 function App() {
+  const [movies, setMovies] = useState([
+    {
+      id: 1,
+      title: 'Kanyombya Comedy',
+      image: 'kanyombya.jpeg',
+      synopsis: 'One of iconic comedian in Rwandan industry',
+      rating: 4,
+      reviews: ['Kanyombya has done everything in the movie industry with no recognition!'],
+    },
+    {
+      id: 2,
+      title: 'Hotel Rwanda',
+      image: 'hotel.jpg',
+      synopsis: 'Fiction movie about a Rwandan Business man',
+      rating: 1,
+      reviews: ['To the world, Rusesabagina is a hero, but to Rwandans He was a business man!'],
+    },
+    {
+      id: 3,
+      title: 'The 600',
+      image: '600.jpg',
+      synopsis: '600 solders of RPA',
+      rating: 5,
+      reviews: ['Great informative history of what actually happened in Rwanda!'],
+    },
+    {
+      id: 4,
+      title: 'Impanga Series',
+      image: 'impanga.jpeg',
+      synopsis: 'Drama about twins',
+      rating: 5,
+      reviews: ['Good movie that you can watch with your family and actually enjoy the story!'],
+    },
+   
+     
+    // Add more movie entries as needed
+  ]);
+
+  const handleRate = (movieId, rating) => {
+    setMovies((prevMovies) =>
+      prevMovies.map((movie) =>
+        movie.id === movieId ? { ...movie, rating } : movie
+      )
+    );
+  };
+
+  const handleReviewSubmit = (movieId, text) => {
+    setMovies((prevMovies) =>
+      prevMovies.map((movie) =>
+        movie.id === movieId ? { ...movie, reviews: [...movie.reviews, text] } : movie
+      )
+    );
+  };
+
   return (
     <div className="App">
-      <Nav />
-      <section className="welcomeSection">
-        <h1>Welcome, {singleUser.name}</h1>
-        <p>Todays date is: {singleUser.todaysDate}</p>
-      </section>
+      <h1>Movie Voting and Review App</h1>
+      <MovieList movies={movies} onRate={handleRate} onReviewSubmit={handleReviewSubmit} />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
